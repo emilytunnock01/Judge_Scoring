@@ -1,0 +1,80 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+void getJudgeData(double& score);
+void calcScore(double& a, double& b, double& c, double& d, double& e);
+
+double findHighest(double arr[], double size);
+double findLowest(double arr[], double size);
+
+int main()
+{
+	//call getJudgeData 5 times, call calcScore 1 time
+
+	double j1, j2, j3, j4, j5;
+
+	getJudgeData(j1);
+	getJudgeData(j2);
+	getJudgeData(j3);
+	getJudgeData(j4);
+	getJudgeData(j5);
+
+	calcScore(j1, j2, j3, j4, j5);
+}
+
+void getJudgeData(double& score)
+{ //get judges score with validation loop
+
+	cout << "enter the 5 judge's scores: \n";
+	cin >> score;
+	while ((0 > score) || (10 < score))
+	{
+		cout << "try again : \n";
+		cin >> score;
+	}
+}
+
+void calcScore(double& a, double& b, double& c, double& d, double& e)
+{// drop highest and lowest, then output avg of the 3
+
+	double scores[] = { a,b,c,d, e };
+	double totalScore = a + b + c + d + e;
+	double max, min;
+
+	max = findHighest(scores, 5);
+
+	min = findLowest(scores, 5);
+
+	double avg = (totalScore - max - min) / 3;
+	cout << "The highest score is " << max << "\n";
+	cout << "The lowest score is " << min << "\n";
+	cout << "The average of the scores is:" << setprecision(2) << avg;
+}
+
+double findHighest(double arr[], double size)
+{
+	double maxArr = arr[0];
+	for (int i = 0; i < 5; i++)
+	{
+		if (maxArr < arr[i])
+		{
+			maxArr = arr[i];
+		}
+	}
+	return maxArr;
+}
+
+double findLowest(double arr[], double size)
+{
+	double minArr = arr[0];
+
+	for (int i = 0; i < 5; i++)
+	{
+		if (minArr > arr[i])
+		{
+			minArr = arr[i];
+		}
+	}
+	return minArr;
+}
